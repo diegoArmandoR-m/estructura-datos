@@ -9,17 +9,28 @@ package polinomioss;
  * @author diego
  */
 public class MetodoGrafico {
-            ValidarPolinomio validars = new ValidarPolinomio();
-    public void raices_metodo_grafico(double[] coeficientes, double valorInicial, double valorFinal, double incremento, double error) {
-        double x = valorInicial;
-        while (x <= valorFinal) {
-            double valorFuncion = validars.evaluar_polinomio(coeficientes, x);
-            
-            if (Math.abs(valorFuncion) <= error) {
-                System.out.println("Raíz encontrada en x = " + x);
-            }
-            
-            x += incremento;
+    public static void metodo_grafico(double[] coeficientes, double x0, double xf) {
+    double incremento = 0.001;
+    double tolerancia = 0.0000001;
+    int contador = 0;
+
+    while (x0 <= xf) {
+        // Evaluar el polinomio en el punto x0
+        double valorFuncion = ValidarPolinomio.evaluar_polinomio(coeficientes, x0);
+
+        // Condición de parada: si el valor de la función es exactamente 0, se encontró una raíz exacta
+        if (Math.abs(valorFuncion) < tolerancia) {
+            System.out.println("Posible raíz encontrada en x = " + x0);
+            contador++;
         }
+
+        // Incrementar x0 para la siguiente iteración
+        x0 += incremento;
     }
+
+    // Informar si no se encontró ninguna raíz en el intervalo dado
+    if (contador == 0) {
+        System.out.println("No se encontró ninguna raíz exacta en el intervalo dado.");
+    }
+  }
 }

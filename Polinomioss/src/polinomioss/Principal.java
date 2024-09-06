@@ -18,20 +18,123 @@ public class Principal {
         // TODO code application logic here
         Scanner leer = new Scanner(System.in);
         String opcionMenu = null;
-        System.out.println("Ingersa el polinomio");
+        String tamanoArreglo = null;
+        String coeficiente= null;
+        String x0=null;
+        String x1=null;
+        String incremento= null;
+        //double[] coeficientes;
         
-        System.out.println("Ingersa la opcion que deseas realizar");
-        opcionMenu= leer.nextLine();
-        switch(opcionMenu){
+        //coeficientes=ecuacion();
+        do{
+            do{
+                System.out.println(Constantes.getInGrado());
+                tamanoArreglo=leer.nextLine();
+            }while(ValidarPolinomio.esNumeroEntero(tamanoArreglo)==false);
+            double[] coeficientes= new double[Integer.parseInt(tamanoArreglo)+1];
+            System.out.println(Constantes.getInCoePolinomio());
+            for(int i=0;i<coeficientes.length;i++){
+                do{
+                    coeficiente=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(coeficiente)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(coeficiente)==false);
+                coeficientes[i]=Double.parseDouble(coeficiente);
+                System.out.println("Siguiente coeficiente");
+            }
+            //coeficientes=ecuacion();
+            System.out.println(Constantes.getMenu());
+            opcionMenu= leer.nextLine();
+            
+            switch(opcionMenu){
             case "1":
-                System.out.println("");
+                //Método Gráfico
+                do{
+                    System.out.println(Constantes.getXInicial());
+                    x0=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(x0)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(x0)==false);
+                do{
+                    System.out.println(Constantes.getXFinal());
+                    x1=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(x0)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(x1)==false);
+                MetodoGrafico.metodo_grafico(coeficientes,Double.parseDouble(x0),Double.parseDouble(x1));
+                break;
             case "2":
-                
+                //Método Bisección
+                do{
+                    System.out.println(Constantes.getXInicial());
+                    x0=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(x0)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(x0)==false);
+                do{
+                    System.out.println(Constantes.getXFinal());
+                    x1=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(x0)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(x1)==false);
+                MetodoBiseccion.encontrarVariasRaices(coeficientes, Double.parseDouble(x0), Double.parseDouble(x1),20);
+                break;
             case "3":
-                System.out.println("Fin del programa");
+                //Método de la Secante
+                do{
+                    System.out.println(Constantes.getXInicial());
+                    x0=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(x0)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(x0)==false);
+                do{
+                    System.out.println(Constantes.getXFinal());
+                    x1=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(x0)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(x1)==false);
+                MetodoSecante.metodo_secantes(coeficientes,Double.parseDouble(x0), Double.parseDouble(x1));
+                break;
             case "4":
+                //Método Newton 
+                do{
+                    System.out.println(Constantes.getXInicial());
+                    x0=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(x0)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(x0)==false);
+                MetodoNewtonRapson.metodoNewtonRaphson(coeficientes,Double.parseDouble(x0));
+                
+               
+                break;
+            case "5":
+                coeficientes=ecuacion();
+                break;
+            case "6":
                 System.out.println("Fin del programa");
+                break;
+            default:
+                System.out.println(Constantes.getInvalido());
+                break;
         }
+        }while(!opcionMenu.equals("6"));
+        leer.close();
+    }//
+    
+    public static double[] ecuacion(){
+        Scanner leer = new Scanner(System.in);
+        String tamanoArreglo = null;
+        String coeficiente= null;
+        double[] arreglo=null;
+        do{
+                System.out.println(Constantes.getInGrado());
+                tamanoArreglo=leer.nextLine();
+            }while(ValidarPolinomio.esNumeroEntero(tamanoArreglo)==false);
+            double[] coeficientes= new double[Integer.parseInt(tamanoArreglo)+1];
+            System.out.println(Constantes.getInCoePolinomio());
+            for(int i=0;i<coeficientes.length;i++){
+                do{
+                    coeficiente=leer.nextLine();
+                    if(ValidarPolinomio.esNumero(coeficiente)==false){System.out.println(Constantes.getInvalido()); }
+                }while(ValidarPolinomio.esNumero(coeficiente)==false);
+                coeficientes[i]=Double.parseDouble(coeficiente);
+                System.out.println("Siguiente coeficiente");
+            }
+        
+        
+        return arreglo;
     }
     
-}
+}//
