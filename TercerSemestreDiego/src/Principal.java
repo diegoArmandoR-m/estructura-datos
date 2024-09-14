@@ -11,21 +11,25 @@
 
 import java.util.Scanner;
 import edu.udelp.estructura.stack.*;
+import edu.udelp.estructura.polaca.*;
 import java.util.Stack;
 
 public class Principal {
     public static void main(String[] args){
-
+      
+      Polaca polaca = new Polaca();
       Scanner leer = new Scanner(System.in);
       String ecuacion = null;
       String caracter = null;
       boolean vacio = true;
       System.out.println("Ingresa tu ecuacion");
-      ///7//ecuacion = leer.nextLine();
-      ecuacion="((3+5)-(6+8)*9)";
+      //ecuacion = leer.nextLine();
+      ecuacion="(3+4)*2-(4+3)";
+      System.out.println(ecuacion);
       if(validarparentesis(ecuacion)==true){
-          resolverEcuacion(ecuacion);
+          polaca.resolverEcuacion(ecuacion);
       }
+      
       leer.close();
     }//
     
@@ -78,7 +82,7 @@ public class Principal {
             }
             
         }
-        System.out.println(operacion);
+        //System.out.println(operacion);
         return respuesta;
     }
     

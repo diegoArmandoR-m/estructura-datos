@@ -24,13 +24,14 @@ public class ArrayStack {
       return a == 0;
    }
    public Boolean isFull(){
-      return a == stack.length;
+              return a == stack.length;
    }
    //Peak
    public Object peak(){
       Object val = null;
       if(!isEmpty()){
          val = stack[a-1];
+         
       }
       return val;
    }
@@ -39,6 +40,7 @@ public class ArrayStack {
       if(!isFull()){
          stack[a] = val;
          a ++;
+         
       }
    }
    //pop
@@ -47,6 +49,7 @@ public class ArrayStack {
     if(!isEmpty()){
        a --;
        val = stack[a];
+       
     }
     return val;
    }
@@ -56,9 +59,10 @@ public class ArrayStack {
    public String toString(){
       String s = " ";
       for(int i = 0; i<a; i++){
-         s += stack[i]+ "=";
+         //s += stack[i]+ "=";
+         s += stack[i];
       }
       return s;
    }
    
-}
+}//
