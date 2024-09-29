@@ -4,6 +4,8 @@
  */
 package edu.udelp.estructura.queue;
 
+import edu.udelp.estructura.nodos.Nodo;
+
 /**
  *
  * @author diego
@@ -50,7 +52,7 @@ public class CircularQueue {
            value=queue[rear];
            queue[rear]=null;
            rear++;
-           size++;
+           size--;
            if(rear==queue.length){
                rear=0;
            }
@@ -77,6 +79,7 @@ public class CircularQueue {
        return value;
    }
    
+    @Override
    public String toString(){
        String s="";
        for(int i=0;i<size;i++){
